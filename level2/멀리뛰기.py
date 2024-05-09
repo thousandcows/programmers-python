@@ -4,12 +4,9 @@ class JumpJump:
         if n <= 2:
             return 2 if n == 2 else 1
 
-        arr = [0 for _ in range(n + 1)]
-        arr[1], arr[2] = 1, 2
+        first, second, counter = 1, 2, 3
+        while counter <= n:
+            first, second = second, (first + second) % 1234567
+            counter += 1
 
-        idx = 3
-        while idx <= n:
-            arr[idx] = (arr[idx - 1] + arr[idx - 2]) % 1234567
-            idx += 1
-
-        return arr[n]
+        return second
