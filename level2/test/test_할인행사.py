@@ -21,8 +21,8 @@ class MyTestCase(unittest.TestCase):
 
     def test_case_three(self):
         want = ["pineapple", "banana"]
-        number = [1, 1]
-        discount = ["pineapple", "banana"]
+        number = [5, 5]
+        discount = ["pineapple", "banana"] * 5
         expected = 1
         self.assertEqual(expected, Discount.solution(want, number, discount))
 
