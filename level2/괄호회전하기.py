@@ -1,31 +1,27 @@
-from collections import deque
-
-
 class RotateParenthesis:
     @staticmethod
     def solution(s: str) -> int:
-        def increment_answer_if_is_valid_string():
-            nonlocal answer, q, pairs_dict
+        def is_valid_string(sub_str: str):
+            nonlocal answer
+            pairs_dict = {
+                ")": "(",
+                "]": "[",
+                "}": "{"
+            }
             stack = []
-            for char in q:
+            for char in sub_str:
                 if stack and char in pairs_dict and pairs_dict[char] == stack[-1]:
                     stack.pop()
                 else:
                     stack.append(char)
-
-            if not stack:
-                answer += 1
+            return not stack
 
         answer = 0
-        q = deque(s)
-        pairs_dict = {
-            ")": "(",
-            "]": "[",
-            "}": "{"
-        }
-
-        for _ in range(len(s)):
-            increment_answer_if_is_valid_string()
-            q.append(q.popleft())
+        s = s * 2
+        for idx in range(len(s) // 2):
+            if is_valid_string(
+                    s[idx: idx + len(s) // 2]
+            ):
+                answer += 1
 
         return answer
