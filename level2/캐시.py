@@ -1,3 +1,6 @@
+from collections import deque
+
+
 class Cache:
     @staticmethod
     def solution(cache_size: int, cities: list[str]) -> int:
@@ -18,3 +21,18 @@ class Cache:
 
             cache[city] = i
         return total_time
+
+    @staticmethod
+    def solution_with_deque(cache_size: int, cities: list[str]) -> int:
+        q, time = deque(maxlen=cache_size), 0
+        cities = list(map(lambda x: x.lower(), cities))
+        for city in cities:
+
+            if city in q:
+                q.remove(city)
+                q.append(city)
+                time += 1
+            else:
+                q.append(city)
+                time += 5
+        return time
