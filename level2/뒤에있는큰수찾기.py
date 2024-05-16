@@ -13,3 +13,15 @@ class FindBiggerNumber:
             if not flag:
                 answer.append(-1)
         return answer
+
+    @staticmethod
+    def solution_with_stack(numbers: list[int]) -> list[int]:
+        answer = [-1 for _ in range(len(numbers))]
+        stack = []
+
+        for idx in range(len(numbers)):
+            while stack and numbers[stack[-1]] < numbers[idx]:
+                answer[stack.pop()] = numbers[idx]
+            stack.append(idx)
+
+        return answer
