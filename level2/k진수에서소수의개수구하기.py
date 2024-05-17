@@ -1,8 +1,18 @@
 class FindPrimeNumberInK:
     @staticmethod
     def solution(n: int, k: int) -> int:
-        def is_prime_number(num: int) -> bool:
+        def convert_to_digit_ten(digit, target_num):
+            if digit == 10:
+                return str(target_num)
 
+            result = ""
+            while target_num != 0:
+                result += str(target_num % digit)
+                target_num //= digit
+            result += str(target_num)
+            return result[::-1]
+
+        def is_prime_number(num: int) -> bool:
             num = int(num)
             if num == 1:
                 return False
@@ -13,16 +23,8 @@ class FindPrimeNumberInK:
             return True
 
         answer = 0
-        converted_number = ""
-        if k != 10:
-            while n > k:
-                converted_number += str(n % k)
-                n //= k
-            converted_number += str(n)
-        else:
-            converted_number = str(n)
-
-        for number in converted_number[::-1].split("0"):
+        converted_number = convert_to_digit_ten(k, n)
+        for number in converted_number.split("0"):
 
             if not number:
                 continue
