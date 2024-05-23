@@ -19,8 +19,8 @@ class NDigitGame:
         game_string = "001"
 
         number = 2
-        while len(game_string) <= p + (m * t):
+        while len(game_string) <= p + (m * (t - 1)):
             game_string += transform_number(n, number)
             number += 1
 
-        return "".join([game_string[i] for i in range(p, len(game_string), m)])[:t]
+        return "".join([game_string[i] for i in range(p, p + (m * t - 1), m)])
