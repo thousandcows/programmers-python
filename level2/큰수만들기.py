@@ -1,14 +1,14 @@
 class MakeBigNumber:
     @staticmethod
     def solution(number: str, k: int) -> str:
-        start_index, counter = 0, len(number) - k
-        word = ""
-        while counter != 0:
-            max_number = "0"
-            for idx in range(start_index, len(number) - counter + 1):
-                if number[idx] > max_number:
-                    max_number = number[idx]
-                    start_index = idx + 1
-            word += max_number
-            counter -= 1
-        return word
+        stack = []
+        for num in number:
+            while k > 0 and stack and stack[-1] < num:
+                stack.pop()
+                k -= 1
+            stack.append(num)
+
+        if k > 0:
+            stack = stack[:-k]
+
+        return "".join(stack)
